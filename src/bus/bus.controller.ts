@@ -17,7 +17,7 @@ export class BusTransController {
     @Query('arrTmn') arrTmn: any,
     @Query('depHour') depHour: any,
     @Query('depMin') depMin: any,
-  ): Promise<string> {
+  ): Promise<object[]> {
     return this.busTransService.getBusTrans(depTmn, arrTmn, depHour, depMin);
   }
 }
