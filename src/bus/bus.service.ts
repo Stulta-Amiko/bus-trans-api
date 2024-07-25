@@ -1,7 +1,7 @@
 import { Injectable, Param, Query } from '@nestjs/common';
-import { ChildProcess, exec, spawn } from 'child_process';
-import navigate from 'src/util/navigate';
+import { BusNavSerivce } from './navigate.service';
 
+const navService = new BusNavSerivce();
 @Injectable()
 export class BusTransService {
   constructor() {}
@@ -16,7 +16,13 @@ export class BusTransService {
     @Query('depHour') depHour: any,
     @Query('depMin') depMin: any,
   ): Promise<object[]> {
-    const route: object[] = await navigate(depTmn, arrTmn, depHour, depMin);
+    //const route: object[] = await navigate(depTmn, arrTmn, depHour, depMin);
+    const route: object[] = await navService.navigate(
+      depTmn,
+      arrTmn,
+      depHour,
+      depMin,
+    );
     return route;
   }
 }
