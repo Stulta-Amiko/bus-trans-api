@@ -61,6 +61,7 @@ class Graph<T> {
       visited.delete(node);
       path.pop();
     };
+    console.log(result);
 
     dfs(start, [], 0);
     return result;
@@ -128,8 +129,9 @@ export class BusNavSerivce {
     let cnt = 0;
     let deleteidx = [];
     let newResult = [];
-    while (1) {
+    while (cutoff < 5) {
       const path = graph.simplepath(depTmn, arrTmn, cutoff);
+
       if (path.length === 0) {
         cutoff++;
         continue;
@@ -213,6 +215,7 @@ export class BusNavSerivce {
         },
       ];
     }
+    console.log(result);
 
     result = this.sortPath(graph, result, depTmn, arrTmn);
 
@@ -246,11 +249,11 @@ export class BusNavSerivce {
               (midHour === parseInt(read[csvIdx][3]) &&
                 midMin < parseInt(read[csvIdx][4]))
             ) {
-              if (read[csvIdx][3] > read[csvIdx][7]) {
+              if (parseInt(read[csvIdx][3]) > parseInt(read[csvIdx][7])) {
                 template[0].totalTime +=
                   (parseInt(read[csvIdx][7]) + 24 - parseInt(read[csvIdx][3])) *
                   60;
-                if (read[csvIdx][4] > read[csvIdx][8]) {
+                if (parseInt(read[csvIdx][4]) > parseInt(read[csvIdx][8])) {
                   template[0].totalTime -= 60;
                   template[0].totalTime +=
                     parseInt(read[csvIdx][8]) + 60 - parseInt(read[csvIdx][4]);
@@ -296,11 +299,12 @@ export class BusNavSerivce {
                 continue;
               }
 
-              if (read[csvIdx][3] > read[csvIdx][7]) {
+              if (parseInt(read[csvIdx][3]) > parseInt(read[csvIdx][7])) {
+                console.log(read[csvIdx][3], read[csvIdx][7]);
                 template[0].totalTime +=
                   (parseInt(read[csvIdx][7]) + 24 - parseInt(read[csvIdx][3])) *
                   60;
-                if (read[csvIdx][4] > read[csvIdx][8]) {
+                if (parseInt(read[csvIdx][4]) > parseInt(read[csvIdx][8])) {
                   template[0].totalTime -= 60;
                   template[0].totalTime +=
                     parseInt(read[csvIdx][8]) + 60 - parseInt(read[csvIdx][4]);
