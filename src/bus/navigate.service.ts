@@ -61,7 +61,6 @@ class Graph<T> {
       visited.delete(node);
       path.pop();
     };
-    console.log(result);
 
     dfs(start, [], 0);
     return result;
@@ -215,7 +214,6 @@ export class BusNavSerivce {
         },
       ];
     }
-    console.log(result);
 
     result = this.sortPath(graph, result, depTmn, arrTmn);
 
@@ -296,11 +294,16 @@ export class BusNavSerivce {
                 parseInt(read[csvIdx][4]) -
                 midMin;
               if (subTime < 10) {
+                console.log('continue');
+                if (read.length - 1 === csvIdx) {
+                  if (!deleted.includes(routeIdx)) {
+                    deleted.push(routeIdx);
+                  }
+                }
                 continue;
               }
 
               if (parseInt(read[csvIdx][3]) > parseInt(read[csvIdx][7])) {
-                console.log(read[csvIdx][3], read[csvIdx][7]);
                 template[0].totalTime +=
                   (parseInt(read[csvIdx][7]) + 24 - parseInt(read[csvIdx][3])) *
                   60;
@@ -346,6 +349,7 @@ export class BusNavSerivce {
     }
     if (deleted.length > 0) {
       deleted = deleted.reverse();
+
       deleted.map((item) => {
         finalRoute.splice(item, 1);
       });
